@@ -1,0 +1,26 @@
+agar function use karna hai toh mere traits accepts kar warna no --> trait bounds
+
+impl shape means "main jaisa hoon waisa toh ise hona hi padega , baaki extra bhi chalega;
+
+yeh sab isiliye taaki strictness aaye code mein kam errors rahe.
+
+println -> consider it as a function so if you want to use it , u have to use its trait ie display but its hard to 
+            implement the trait. so derive macros comes in picture.
+
+derive impls trait?
+
+debug macro imlps debug trait when derive is called
+
+function mein certain types , and definite things pass kar sakte ho, but in macros you can pass anything as much.
+
+#procedural
+custom derive -> for deriving macro with traits.
+
+attribute-> for not derive just adding a attribute 
+
+function -> gives contol over input to devs
+
+#declrative
+prinln type simple give input get output
+
+

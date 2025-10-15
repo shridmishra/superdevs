@@ -1,20 +1,21 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct CreateOrderInput {
-    pub price: u32,
-    pub quantity: u32,
-    pub user_id: u32,
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CreateOrder {
+    pub price: f64,
+    pub quantity: f64,
+    pub user_id: String,
     pub side: Side,
 }
 
-#[derive(Serialize, Deserialize, Debug,PartialEq)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum Side {
     Buy,
-    Sell,
+    Sell
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DeleteOrder {
     pub order_id: String,
+    pub user_id: String,
 }

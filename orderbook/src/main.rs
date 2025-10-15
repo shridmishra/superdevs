@@ -1,27 +1,24 @@
 use std::sync::{Arc, Mutex};
 
-use actix_web::{App, HttpServer};
+use actix_web::{web::{ Data}, App, HttpServer};
 
-use crate::{
-    orderbook::OrderBook,
-    routes::{create_order, delete_order, get_depth},
-};
+use crate::orderbook::Orderbook;
 
-pub mod input;
-pub mod orderbook;
-pub mod output;
 pub mod routes;
+pub mod input;
+pub mod output;
+pub mod orderbook;
 
 #[actix_web::main]
-async fn main() -> Result<(), std::io::Error> {
-    let orderbook = Arc::new(Mutex::new(OrderBook::new()));
+async fn main() -> std::io::Result<()> {
+    let orderbook = Arc::new(Mutex::new(Orderbook::default()));
 
     HttpServer::new(move || {
         App::new()
-            .app_data(orderbook.clone())
-            .service(create_order)
-            .service(delete_order)
-            .service(get_depth)
+            .app_data(Data::new(orderbook.clone()))
+            .service(routes::create_order)
+            .service(routes::delete_order)
+            .service(routes::get_depth)
     })
     .bind("127.0.0.1:8080")?
     .run()
